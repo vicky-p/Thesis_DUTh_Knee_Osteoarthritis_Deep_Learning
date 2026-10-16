@@ -26,21 +26,24 @@
 Οστεοαρθρίτιδα Γόνατος, Κλίμακα Kellgren-Lawrence, Vision Transformer, ResNet-50, Μεταφορά Μάθησης (Transfer Learning), Grad-CAM, Ensemble, Βαθιά Μάθηση, Ιατρική Επεξεργασία Εικόνας.
 
 # Abstract (English)
-This diploma thesis focuses on the development, implementation, and rigorous evaluation of advanced artificial intelligence methodologies for the automated staging of knee Osteoarthritis (OA). The primary objective is to overcome the diagnostic subjectivity inherent in manual clinical assessments by introducing an objective, deep learning-driven classifier that grades radiological findings according to the Kellgren-Lawrence (KL) scale (grades 0–4).
+The purpose of this diploma thesis is the development, implementation, and evaluation of automated methods for grading knee radiographs in the diagnosis and monitoring of knee Osteoarthritis (OA). The primary objective is to address the diagnostic subjectivity inherent in manual clinical assessments by replacing them with an objective, automated classification system that grades radiological findings according to the Kellgren-Lawrence scale (KL grades 0–4).
+The work of Thomson [2] serves as the benchmark, representing a highly comprehensive published system using hand-crafted features based on traditional computer vision techniques, which achieved AUC=0.904 for binary OA detection and weighted kappa=0.49 for multiclass KL 0–4 grading. The methodological approach of this thesis is progressive and comprises of:
 
-To accurately measure algorithmic progress, our pipeline is benchmarked against the established work of Thomson et al. (2016), a comprehensive system based on hand-crafted features (AUC=0.904, k_w=0.49). Our methodological approach is progressive and includes:
+(a) The development of a hand-crafted feature extraction pipeline with a Random Forest classifier as a baseline system (Phase 1a and Phase 1b).
 
-(a) A baseline pipeline utilizing hand-crafted feature extraction and a Random Forest classifier (Phase 1a & Phase 1b).
+(b) The transition to modern Deep Learning architectures through the implementation of a pipeline featuring the Vision Transformer ViT-B/16 (Phase 2a).
 
-(b) A transition to modern Deep Learning architectures, spearheaded by the Vision Transformer ViT-B/16 (Phase 2a).
+(c) Extensive comparative experiments employing Convolutional Neural Networks (ResNet-50, EfficientNet-B4), Hybrid models, Test-Time Augmentation (TTA) techniques, and Ensemble methods (Phase 2b).
 
-(c) Extensive comparative experiments employing Convolutional Neural Networks (ResNet-50, EfficientNet-B4), Hybrid architectures, Test-Time Augmentation (TTA), and Ensemble methods (Phase 2b).
+(d) Model training and evaluation on the public "Knee OA Dataset with Severity" (7260 radiographs, a subset of the OAI dataset).
 
-All models were trained and evaluated on the public "Knee OA Dataset with Severity" (7,260 radiographs, an OAI subset). Furthermore, the medical interpretability of the models' decisions was validated using the Grad-CAM algorithm. 
+(e) Decision interpretability for the systems using the Grad-CAM algorithm.
 
-The experimental results demonstrate the absolute superiority of Deep Learning. The ViT-B/16 achieved an AUC=0.925 and a weighted Kappa of k_w=0.816, marking a remarkable 67% improvement over the classical baseline. The optimal overall performance was achieved by the ViT+ResNet Ensemble, reaching k_w=0.826 and AUC=0.932 without additional training. Robust statistical analysis (paired bootstrap, 2,000 resamples) confirms that while ViT-B/16 and ResNet-50 are statistically equivalent (P=0.527), the Ensemble significantly outperforms both (P=0.999).
+The main results demonstrate the clear superiority of Deep Learning. ViT-B/16 achieved 𝑘𝑤=0.816 (+67% over the Thomson baseline) and AUC=0.925 (+2.3%). The optimal performance was attained via the ViT + ResNet Ensemble combination, reaching 𝑘𝑤=0.826 and AUC=0.932 without requiring additional training. Robust statistical analysis (paired bootstrap, 2,000 resamples) demonstrates that ViT-B/16 and ResNet-50 are statistically equivalent (𝑃=0.527), while confirming the significant superiority of the Ensemble model over all individual models (𝑃=0.999).
 
-Crucially, this research highlights two major findings. Firstly, Grad-CAM heatmaps verify that the models focus on anatomically correct regions, revealing complementary attention patterns—ViT exhibits a spot-like focus on osteophytes, whereas ResNet displays band-like attention along the joint space—which mathematically justifies the Ensemble's superiority. Secondly, a severe label noise phenomenon was identified in the borderline KL2 grade, where 28.2% of the images were consistently misclassified by all evaluated models. This finding proves that further improvements in early-stage OA diagnosis are currently bounded not by algorithmic capacity, but by the inherent medical subjectivity and annotation noise present in the ground-truth data.
+Furthermore, this research brings to light two critical findings:
+1. Grad-CAM heatmaps confirm that the models make anatomically correct decisions, focusing appropriately on critical image regions. Moreover, they reveal complementary attention patterns: ViT displays a spot-like focus on osteophytes, whereas ResNet-50 shows a band-like attention along the joint space, thus providing mathematical and physical justification for the Ensemble model's superiority.
+2. A pronounced label noise phenomenon was identified in the intermediate KL2 grade, where 28.2% of the radiographs could not be correctly classified by any model. This finding proves that further diagnostic improvement in early-stage disease is bound not by algorithmic capacity, but by the inherent medical subjectivity and annotation noise present in the ground-truth data.
 
 # Keywords: 
 Knee Osteoarthritis, Kellgren-Lawrence Scale, Vision Transformer, ResNet-50, Transfer Learning, Grad-CAM, Ensemble Methods, Deep Learning, Medical Image Analysis.
