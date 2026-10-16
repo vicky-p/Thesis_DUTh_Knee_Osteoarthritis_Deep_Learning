@@ -1,0 +1,38 @@
+
+======================================================================
+  Bootstrap 95% CI  (n_boot=2000, resampling the 1656-image test set)
+======================================================================
+  Model           AUC (95% CI)              kw (95% CI)               
+  rf              0.699 [0.673, 0.724]      0.228 [0.190, 0.266]
+  rf_landmarks    0.690 [0.665, 0.715]      0.192 [0.156, 0.230]
+  vit             0.925 [0.912, 0.937]      0.816 [0.797, 0.835]
+  resnet          0.924 [0.911, 0.937]      0.813 [0.794, 0.831]
+  efficientnet    0.911 [0.897, 0.925]      0.780 [0.759, 0.801]
+  hybrid          0.921 [0.908, 0.934]      0.808 [0.788, 0.827]
+  hybrid_finetuned0.920 [0.907, 0.932]      0.806 [0.786, 0.826]
+
+======================================================================
+  Paired bootstrap: P(AUC_A <= AUC_B) — is A really ahead of B?
+======================================================================
+  rf             vs rf_landmarks    P(rf ahead on AUC) = 0.723  <- not distinguishable (< 95%)
+  rf             vs vit             P(vit ahead on AUC) = 1.000  <- distinguishable
+  rf             vs resnet          P(resnet ahead on AUC) = 1.000  <- distinguishable
+  rf             vs efficientnet    P(efficientnet ahead on AUC) = 1.000  <- distinguishable
+  rf             vs hybrid          P(hybrid ahead on AUC) = 1.000  <- distinguishable
+  rf             vs hybrid_finetuned  P(hybrid_finetuned ahead on AUC) = 1.000  <- distinguishable
+  rf_landmarks   vs vit             P(vit ahead on AUC) = 1.000  <- distinguishable
+  rf_landmarks   vs resnet          P(resnet ahead on AUC) = 1.000  <- distinguishable
+  rf_landmarks   vs efficientnet    P(efficientnet ahead on AUC) = 1.000  <- distinguishable
+  rf_landmarks   vs hybrid          P(hybrid ahead on AUC) = 1.000  <- distinguishable
+  rf_landmarks   vs hybrid_finetuned  P(hybrid_finetuned ahead on AUC) = 1.000  <- distinguishable
+  vit            vs resnet          P(vit ahead on AUC) = 0.527  <- not distinguishable (< 95%)
+  vit            vs efficientnet    P(vit ahead on AUC) = 0.996  <- distinguishable
+  vit            vs hybrid          P(vit ahead on AUC) = 0.990  <- distinguishable
+  vit            vs hybrid_finetuned  P(vit ahead on AUC) = 0.978  <- distinguishable
+  resnet         vs efficientnet    P(resnet ahead on AUC) = 0.995  <- distinguishable
+  resnet         vs hybrid          P(resnet ahead on AUC) = 0.742  <- not distinguishable (< 95%)
+  resnet         vs hybrid_finetuned  P(resnet ahead on AUC) = 0.837  <- not distinguishable (< 95%)
+  efficientnet   vs hybrid          P(hybrid ahead on AUC) = 0.957  <- distinguishable
+  efficientnet   vs hybrid_finetuned  P(hybrid_finetuned ahead on AUC) = 0.930  <- not distinguishable (< 95%)
+  hybrid         vs hybrid_finetuned  P(hybrid ahead on AUC) = 0.727  <- not distinguishable (< 95%)
+

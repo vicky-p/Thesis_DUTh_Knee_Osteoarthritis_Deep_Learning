@@ -1,0 +1,13 @@
+{
+  "phase": "Ensemble_vit_resnet_efficientnet",
+  "overall_accuracy": 0.6026570048309179,
+  "weighted_kappa": 0.8220492617994855,
+  "binary_oa_auc": 0.9324067137887813,
+  "per_class_accuracy": {
+    "KL0": 0.5868544600938967,
+    "KL1": 0.6993243243243243,
+    "KL2": 0.3982102908277405,
+    "KL3": 0.8699551569506726,
+    "KL4": 0.8627450980392157
+  }
+}

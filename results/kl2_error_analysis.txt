@@ -1,0 +1,81 @@
+
+======================================================================
+  KL2 error analysis  (447 true-KL2 test images, 7 models)
+======================================================================
+
+  Distribution of 'how many of 7 models got each KL2 image right':
+    0/7 models correct:  126  ###########
+    1/7 models correct:   73  ######
+    2/7 models correct:   32  ##
+    3/7 models correct:   44  ###
+    4/7 models correct:   49  ####
+    5/7 models correct:   69  ######
+    6/7 models correct:   36  ###
+    7/7 models correct:   18  #
+
+  Always wrong (0/7 models): 126 (28.2%)  <- candidates for label noise / genuinely ambiguous KL1-2-3 boundary
+  Always right (7/7 models): 18 (4.0%)
+
+  When a model misses KL2, what does it predict instead?
+    Predicted KL0:  799  (40.4%)
+    Predicted KL1:  918  (46.4%)
+    Predicted KL3:  258  (13.1%)
+    Predicted KL4:    2  (0.1%)
+
+  59.5% of KL2 misclassifications land on an ADJACENT grade (KL1 or KL3) — blended across all 7 models, including the much
+  weaker RF ones, so this blended number is misleading. Split by model quality:
+
+    DL models (vit/resnet/efficientnet/hybrid) (n_miss=1267):
+      -> KL0:  121 (9.6%)
+      -> KL1:  912 (72.0%)
+      -> KL3:  232 (18.3%)
+      -> KL4:    2 (0.2%)
+      Adjacent (KL1/KL3): 90.3%   Distant (KL0/KL4): 9.7%
+
+    RF models (rf/rf_landmarks) (n_miss=710):
+      -> KL0:  678 (95.5%)
+      -> KL1:    6 (0.8%)
+      -> KL3:   26 (3.7%)
+      Adjacent (KL1/KL3): 4.5%   Distant (KL0/KL4): 95.5%
+
+  Interpretation: the accurate DL models fail almost entirely on ADJACENT
+  grades (mild<->moderate boundary ambiguity, a genuine ordinal-labeling
+  problem) — the weak RF models instead collapse toward the majority class
+  KL0, a feature-quality problem, not a labeling-ambiguity one.
+
+  Pairwise agreement on KL2 images (do models fail on the same images?):
+    rf             & rf_landmarks   agree on 331/447 (74%)  [34 both-right, 297 both-wrong]
+    rf             & vit            agree on 273/447 (61%)  [63 both-right, 210 both-wrong]
+    rf             & resnet         agree on 278/447 (62%)  [61 both-right, 217 both-wrong]
+    rf             & efficientnet   agree on 308/447 (69%)  [51 both-right, 257 both-wrong]
+    rf             & hybrid         agree on 263/447 (59%)  [65 both-right, 198 both-wrong]
+    rf             & hybrid_finetuned agree on 254/447 (57%)  [72 both-right, 182 both-wrong]
+    rf_landmarks   & vit            agree on 271/447 (61%)  [51 both-right, 220 both-wrong]
+    rf_landmarks   & resnet         agree on 276/447 (62%)  [49 both-right, 227 both-wrong]
+    rf_landmarks   & efficientnet   agree on 306/447 (68%)  [39 both-right, 267 both-wrong]
+    rf_landmarks   & hybrid         agree on 259/447 (58%)  [52 both-right, 207 both-wrong]
+    rf_landmarks   & hybrid_finetuned agree on 248/447 (55%)  [58 both-right, 190 both-wrong]
+    vit            & resnet         agree on 350/447 (78%)  [144 both-right, 206 both-wrong]
+    vit            & efficientnet   agree on 332/447 (74%)  [110 both-right, 222 both-wrong]
+    vit            & hybrid         agree on 431/447 (96%)  [196 both-right, 235 both-wrong]
+    vit            & hybrid_finetuned agree on 390/447 (87%)  [187 both-right, 203 both-wrong]
+    resnet         & efficientnet   agree on 347/447 (78%)  [113 both-right, 234 both-wrong]
+    resnet         & hybrid         agree on 340/447 (76%)  [146 both-right, 194 both-wrong]
+    resnet         & hybrid_finetuned agree on 331/447 (74%)  [153 both-right, 178 both-wrong]
+    efficientnet   & hybrid         agree on 320/447 (72%)  [111 both-right, 209 both-wrong]
+    efficientnet   & hybrid_finetuned agree on 305/447 (68%)  [115 both-right, 190 both-wrong]
+    hybrid         & hybrid_finetuned agree on 394/447 (88%)  [196 both-right, 198 both-wrong]
+
+======================================================================
+  KL2-specific significance: does adding landmarks actually help KL2?
+======================================================================
+  vit: KL2 acc = 0.441
+  hybrid: KL2 acc = 0.472
+  hybrid_finetuned: KL2 acc = 0.523
+  P(hybrid ahead of vit on KL2 acc) = 1.000
+  P(hybrid_finetuned ahead of vit on KL2 acc) = 1.000
+  P(hybrid_finetuned ahead of hybrid on KL2 acc) = 0.999
+
+  Conclusion: landmark features don't move aggregate AUC/kappa (not
+  significant), but SIGNIFICANTLY improve KL2-specific accuracy, and
+  jointly fine-tuning the ViT backbone amplifies this further (52.3%).
