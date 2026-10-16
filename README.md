@@ -14,7 +14,8 @@
 
 Επιπλέον, η έρευνα φέρνει στο φως δύο κρίσιμα ευρήματα: Πρώτον, οι χάρτες Grad-CAM αποδεικνύουν ότι τα μοντέλα λαμβάνουν ανατομικά ορθές αποφάσεις, αξιοποιώντας συμπληρωματικά οπτικά μοτίβα (το ViT εστιάζει κυκλικά στα οστεόφυτα, ενώ το ResNet-50 γραμμικά στον αρθρικό χώρο). Δεύτερον, εντοπίστηκε ένα ισχυρό φαινόμενο "θορύβου ετικετών" (label noise) στην ενδιάμεση κλάση KL2, όπου το 28.2% των ακτινογραφιών στάθηκε αδύνατο να ταξινομηθεί σωστά από όλα τα μοντέλα ανεξαιρέτως. Το εύρημα αυτό αποδεικνύει ότι η περαιτέρω βελτίωση της διάγνωσης στα αρχικά στάδια της νόσου δεν περιορίζεται από την αλγοριθμική ισχύ, αλλά από την εγγενή ιατρική υποκειμενικότητα των αρχικών δεδομένων.
 
-# Λέξεις-Κλειδιά: Οστεοαρθρίτιδα Γόνατος, Κλίμακα Kellgren-Lawrence, Vision Transformer, ResNet-50, Μεταφορά Μάθησης (Transfer Learning), Grad-CAM, Ensemble, Βαθιά Μάθηση, Ιατρική Επεξεργασία Εικόνας.
+# Λέξεις-Κλειδιά: 
+Οστεοαρθρίτιδα Γόνατος, Κλίμακα Kellgren-Lawrence, Vision Transformer, ResNet-50, Μεταφορά Μάθησης (Transfer Learning), Grad-CAM, Ensemble, Βαθιά Μάθηση, Ιατρική Επεξεργασία Εικόνας.
 
 # Abstract (English)
 This diploma thesis focuses on the development, implementation, and rigorous evaluation of advanced artificial intelligence methodologies for the automated staging of knee Osteoarthritis (OA). The primary objective is to overcome the diagnostic subjectivity inherent in manual clinical assessments by introducing an objective, deep learning-driven classifier that grades radiological findings according to the Kellgren-Lawrence (KL) scale (grades 0–4).
@@ -29,4 +30,5 @@ The experimental results demonstrate the absolute superiority of Deep Learning. 
 
 Crucially, this research highlights two major findings: First, Grad-CAM heatmaps verify that the models focus on anatomically correct regions, revealing complementary attention patterns—ViT exhibits a spot-like focus on osteophytes, whereas ResNet displays band-like attention along the joint space—which mathematically justifies the Ensemble's superiority. Second, a severe label noise phenomenon was identified in the borderline KL2 grade, where 28.2% of the images were consistently misclassified by all evaluated models. This finding proves that further improvements in early-stage OA diagnosis are currently bounded not by algorithmic capacity, but by the inherent medical subjectivity and annotation noise present in the ground-truth data.
 
-# Keywords: Knee Osteoarthritis, Kellgren-Lawrence Scale, Vision Transformer, ResNet-50, Transfer Learning, Grad-CAM, Ensemble Methods, Deep Learning, Medical Image Analysis.
+# Keywords: 
+Knee Osteoarthritis, Kellgren-Lawrence Scale, Vision Transformer, ResNet-50, Transfer Learning, Grad-CAM, Ensemble Methods, Deep Learning, Medical Image Analysis.
